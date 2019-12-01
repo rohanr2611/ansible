@@ -1,0 +1,12 @@
+---
+- hosts: workstation
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: install packages
+      yum:
+        name: ['git','httpd','vim']
+        state: installed
+
+      when: ansible_distribution =='CentOS'

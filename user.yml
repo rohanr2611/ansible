@@ -1,0 +1,10 @@
+---
+- hosts: all
+  tasks:
+    - name: capture the outpuut
+      command: whoami
+      register: user_login
+      ignore_errors: True
+
+    - name: print the username
+      debug: msg "Username is {{ user_login.stdout }}"

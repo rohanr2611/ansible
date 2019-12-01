@@ -1,0 +1,7 @@
+---
+- hosts: app
+  tasks:
+    - name: create an empy file
+      file:
+        path: /tmp/etlhive123.txt
+        state: touch

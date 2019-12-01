@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars:
+    runtime_pass: default_pass
+  tasks:
+    - name: modify line
+      lineinfile:
+        path: /var/www/html/index.html
+        regexp: '^<br>application_password='
+        line: '<br>application_password={{ runtime_pass }}'
+      notify:
+        - start httpd
+        - print the username
+
+  handlers:
+    - name: start httpd
+      service: name=httpd state=restarted
+
+    - name: print the username
+      debug: "logged in as user centos"
